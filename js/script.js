@@ -33,6 +33,7 @@ const optTitleSelector = '.post-title';
 const optTitleListSelector = '.titles';
 const optArticleTagsSelector = '.post-tags .list';
 const optArticleAuthorSelector = '.post-author';
+const optTagsListSelector = '.list.tags';
 
 function generateTitleLinks(customSelector = ''){
   /* [DONE] remove contents of titleList */
@@ -71,6 +72,9 @@ function generateTitleLinks(customSelector = ''){
 generateTitleLinks();
 
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
+  // console.log(allTags);
   /* [DONE] find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   // console.log('ARTICLES: ', articles);
@@ -94,6 +98,12 @@ function generateTags(){
       // console.log('linkHTML: ', linkHTML);
       /* [DONE] add generated code to html variable */
       html = html + linkHTML + ' ';
+      // console.log('linkHTML: v2: ', linkHTML);
+      /* [NEW] check if this link is NOT already in allTags */
+      if(allTags.indexOf(linkHTML) == -1){
+        /* [NEW] add generated code to allTags array */
+        allTags.push(linkHTML);
+      }
     /* [DONE] END LOOP: for each tag */
     }
     /* [DONE] insert HTML of all the links into the tags wrapper */
@@ -101,6 +111,13 @@ function generateTags(){
     // console.log('tagWrapper: ', tagWrapper);
   /* [DONE] END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector(optTagsListSelector);
+  console.log('tagList: ', tagList);
+  console.log('allTags: ', allTags);
+  /* [NEW] add html from allTags to tagList */
+  tagList.innerHTML = allTags.join(' ');
+  console.log('tagList updated: ', tagList);
 }
 generateTags();
 
@@ -162,17 +179,17 @@ function generateAuthors(){
     /* [DONE] find author wrapper */
     const authorWrapper = article.querySelector(optArticleAuthorSelector);
     // console.log('authorWrapper: ', authorWrapper);
-    /* make html variable with empty string */
+    /* [DONE] make html variable with empty string */
     let html = '';
-    /* get tags from data-author attribute */
+    /* [DONE] get tags from data-author attribute */
     const articleAuthor = article.getAttribute('data-author');
     // console.log('articleAuthor: ', articleAuthor);
-    /* generate HTML of the link */
+    /* [DONE] generate HTML of the link */
     const linkHTML ='by <a href="#' + articleAuthor + '">' + articleAuthor.toUpperCase();
     // console.log('linkHTML: ', linkHTML);
-    /* [add generated code to html variable */
+    /* [DONE] add generated code to html variable */
     html = html + linkHTML + ' ';
-    /* insert HTML of all the links into the tags wrapper */
+    /* [DONE] insert HTML of all the links into the tags wrapper */
     authorWrapper.innerHTML = html;
   /* [DONE] END LOOP: for every article: */
   }
