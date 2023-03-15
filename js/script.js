@@ -69,7 +69,7 @@ function calculateTagsParams(tags){
   let params = {
     max: 0,
     min: 999999
-  }
+  };
   /* START LOOP for each tag in object */
   for(let tag in tags){
     // console.log(tag + ' is used ' + tags[tag] + ' times');
@@ -121,7 +121,7 @@ function generateTags(){
         /* [NEW] add generated code to allTags array */
         allTags[tag]=1;
       }
-        /* [DONE] increment number of allTags */
+      /* [DONE] increment number of allTags */
       else {
         allTags[tag]++;
       }
@@ -210,7 +210,7 @@ function generateAuthors(){
     /* [DONE] get author from data-author attribute */
     const articleAuthor = article.getAttribute('data-author');
     /* [DONE] generate HTML of the link */
-    const linkHTML =`by <a href="#${articleAuthor}">${articleAuthor.toUpperCase()}</a>`;
+    const linkHTML =`by <a href="#author-${articleAuthor}">${articleAuthor.toUpperCase()}</a>`;
     /* [DONE] add generated code to html variable */
     html = html + linkHTML;
     /* [DONE] insert HTML of all the links into the author wrapper */
@@ -231,7 +231,7 @@ function authorClickHandler(event){
   const href = clickedElement.getAttribute('href');
   console.log('href: ' + href);
   /* [DONE] make a new constant "author" and extract author from the "href" constant */
-  const author = href.replace('#', '');
+  const author = href.replace('#author-', '');
   console.log('author: ' + author);
   /* [DONE] find all author links with "href" attribute equal to the "href" constant */
   const targetLinks = document.querySelectorAll('a[href="' + href + '"]');
