@@ -1,7 +1,9 @@
 'use strict';
 
 const templates = {
-  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
 };
 // const optArticleSelector = '.post';
 // const optTitleSelector = '.post-title';
@@ -59,10 +61,10 @@ function generateTitleLinks(customSelector = ''){
     /* [DONE] get the title from the title element */
     const articleTitle = articleTitleElement.innerHTML;
     /* [DONE] create HTML of the link */
-    // another way:
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-    // const linkHTMLData = {id: articleId, title: articleTitle};
-    // const linkHTML = templates.articleLink(linkHTMLData);
+    // const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    /* [NEW] also create HTML of the link in different way with Handlebars */
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     /* [DONE] insert link into titleList */
     // another way to insert instead of: 'html = html + linkHTML' below:
     // titleList.insertAdjacentHTML('beforeend', linkHTML);
@@ -125,7 +127,10 @@ function generateTags(){
     /* [DONE] START LOOP: for each tag */
     for (let tag of articleTagsArray) {
       /* [DONE] generate HTML of the link */
-      const linkHTML = `<li><a href="#tag-${tag}">${tag}</a></li>`;
+      // const linkHTML = `<li><a href="#tag-${tag}">${tag}</a></li>`;
+      /* Handlebars method to generate HTML of the link */
+      const linkHTMLData = {tagName: tag};
+      const linkHTML = templates.tagLink(linkHTMLData);
       /* [DONE] add generated code to html variable */
       html = html + linkHTML + ' ';
       /* [NEW] check if this link is NOT already in allTags */
@@ -224,7 +229,9 @@ function generateAuthors(){
     /* [DONE] get author from data-author attribute */
     const articleAuthor = article.getAttribute('data-author');
     /* [DONE] generate HTML of the link */
-    const linkHTML =`<li><a href="#author-${articleAuthor}">${articleAuthor.toUpperCase()}</a></li>`;
+    // const linkHTML =`<li><a href="#author-${articleAuthor}">${articleAuthor.toUpperCase()}</a></li>`;
+    const linkHTMLData = {authorName: articleAuthor};
+    const linkHTML = templates.authorLink(linkHTMLData);
     /* [DONE] add generated code to html variable */
     html = html + linkHTML;
     /* [NEW] check if this link is NOT already in allAuthors */
