@@ -1,5 +1,8 @@
 'use strict';
 
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+};
 // const optArticleSelector = '.post';
 // const optTitleSelector = '.post-title';
 const optTitleListSelector = '.titles';
@@ -194,7 +197,7 @@ function tagClickHandler(event){
 
 function addClickListenersToTags(){
   /* [DONE] find all links to tags */
-  const tagLinks = document.querySelectorAll('.post-tags .list a');
+  const tagLinks = document.querySelectorAll('.post-tags .list a, .sidebar .tags a');
   /* [DONE] START LOOP: for each link */
   for(let link of tagLinks){
     /* [DONE] add tagClickHandler as event listener for that link */
@@ -271,7 +274,7 @@ function authorClickHandler(event){
 
 function addClickListenersToAuthors(){
   /* [DONE] find all links to authors */
-  const authorLinks = document.querySelectorAll('.post-author a');
+  const authorLinks = document.querySelectorAll('.post-author a, .sidebar .authors a');
   /* [DONE] START LOOP: for each link */
   for(let link of authorLinks){
     /* [DONE] add authorClickHandler as event listener for that link */
