@@ -59,7 +59,10 @@ function generateTitleLinks(customSelector = ''){
     /* [DONE] get the title from the title element */
     const articleTitle = articleTitleElement.innerHTML;
     /* [DONE] create HTML of the link */
+    // another way:
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    // const linkHTMLData = {id: articleId, title: articleTitle};
+    // const linkHTML = templates.articleLink(linkHTMLData);
     /* [DONE] insert link into titleList */
     // another way to insert instead of: 'html = html + linkHTML' below:
     // titleList.insertAdjacentHTML('beforeend', linkHTML);
@@ -197,7 +200,7 @@ function tagClickHandler(event){
 
 function addClickListenersToTags(){
   /* [DONE] find all links to tags */
-  const tagLinks = document.querySelectorAll('.post-tags .list a, .sidebar .tags a');
+  const tagLinks = document.querySelectorAll('a[href^="#tag-"]');
   /* [DONE] START LOOP: for each link */
   for(let link of tagLinks){
     /* [DONE] add tagClickHandler as event listener for that link */
@@ -274,7 +277,7 @@ function authorClickHandler(event){
 
 function addClickListenersToAuthors(){
   /* [DONE] find all links to authors */
-  const authorLinks = document.querySelectorAll('.post-author a, .sidebar .authors a');
+  const authorLinks = document.querySelectorAll('a[href^="#author-"]');
   /* [DONE] START LOOP: for each link */
   for(let link of authorLinks){
     /* [DONE] add authorClickHandler as event listener for that link */
